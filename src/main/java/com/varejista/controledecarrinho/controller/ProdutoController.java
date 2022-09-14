@@ -31,12 +31,12 @@ public class ProdutoController {
     }
 
     @PostMapping()
-    public ResponseEntity<Void> insert(@RequestBody Produto obj) {
+    public ResponseEntity<Produto> insert(@RequestBody Produto obj) {
         Produto produto = produtoService.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(produto.getId()).toUri();
 
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.created(uri).body(produto);
     }
 
     @PutMapping(value = "/{nome}")
@@ -47,7 +47,7 @@ public class ProdutoController {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping()
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<Produto> delete(@PathVariable Integer id) {
         produtoService.delete(id);
         return ResponseEntity.noContent().build();

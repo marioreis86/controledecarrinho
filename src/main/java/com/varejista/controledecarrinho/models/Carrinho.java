@@ -39,12 +39,8 @@ public class Carrinho implements Serializable {
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime dataAtualizacao;
 
-    /*@EmbeddedId
-    @JsonIgnore
-    private UsuarioCarrinhoPK usuarioCarrinhoPK;*/
-
     @JsonManagedReference
-    @OneToMany
+    @OneToMany(mappedBy = "carrinho")
     private List<Item> itens;
 
     @OneToMany

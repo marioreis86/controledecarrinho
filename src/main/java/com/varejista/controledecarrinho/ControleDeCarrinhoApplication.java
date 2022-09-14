@@ -6,6 +6,7 @@ import com.varejista.controledecarrinho.models.Item;
 import com.varejista.controledecarrinho.models.Produto;
 import com.varejista.controledecarrinho.service.CarrinhoService;
 import com.varejista.controledecarrinho.service.CupomService;
+import com.varejista.controledecarrinho.service.ItemService;
 import com.varejista.controledecarrinho.service.ProdutoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +27,7 @@ public class ControleDeCarrinhoApplication {
 		SpringApplication.run(ControleDeCarrinhoApplication.class, args);
 	}
 
-	private static final Logger log = LoggerFactory.getLogger(ControleDeCarrinhoApplication.class);
+	//private static final Logger log = LoggerFactory.getLogger(ControleDeCarrinhoApplication.class);
 
 	@Autowired
 	private CarrinhoService carrinhoService;
@@ -34,6 +35,9 @@ public class ControleDeCarrinhoApplication {
 	private ProdutoService prodService;
 	@Autowired
 	private CupomService cupomService;
+
+	@Autowired
+	private ItemService itemService;
 
 	@Bean
 	CommandLineRunner runner() {
@@ -48,25 +52,21 @@ public class ControleDeCarrinhoApplication {
 			prodService.insert(prod2);
 			prodService.insert(prod3);
 
-			log.trace("Produto 1:" + prod1);
-			log.trace("Produto 2:" + prod2);
-			log.trace("Produto 3:" + prod3);
-
 			Cupom cupom1 = new Cupom(1, "10DESCONTO", 0.10);
-			Cupom cupom2 = new Cupom(1, "20DESCONTO", 0.20);
-			Cupom cupom3 = new Cupom(1, "CUPOM90", 0.90);
+			Cupom cupom2 = new Cupom(2, "20DESCONTO", 0.20);
+			Cupom cupom3 = new Cupom(3, "CUPOM90", 0.90);
 
 			cupomService.insert(cupom1);
 			cupomService.insert(cupom2);
 			cupomService.insert(cupom3);
 
-			log.trace("Cupom 1:" + cupom1);
-			log.trace("Cupom 2:" + cupom2);
-			log.trace("Cupom 3:" + cupom3);
-
 			Item item1 = new Item(carrinho, prod1, 10);
 			Item item2 = new Item(carrinho, prod2, 4);
 			Item item3 = new Item(carrinho, prod3, 2);
+
+			/*itemService.insert(item1);
+			itemService.insert(item2);
+			itemService.insert(item3);*/
 
 			List<Item> itens = List.of(item1, item2, item3);
 			List<Cupom> cupons = List.of(cupom1, cupom2, cupom3);

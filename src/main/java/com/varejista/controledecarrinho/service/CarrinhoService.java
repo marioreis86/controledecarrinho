@@ -47,6 +47,9 @@ public class CarrinhoService {
         return carrinhoRepository.save(carrinho);
     }
 
+    public List<Carrinho> findAll() {
+        return carrinhoRepository.findAll();
+    }
     public Carrinho findById(Integer id) {
         Optional<Carrinho> carrinho = carrinhoRepository.findById(id);
         return carrinho.orElseThrow(() ->

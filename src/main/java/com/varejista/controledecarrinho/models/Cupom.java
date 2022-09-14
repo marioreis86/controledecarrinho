@@ -12,7 +12,7 @@ import java.io.Serializable;
 @NoArgsConstructor @AllArgsConstructor
 public class Cupom implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(unique = true)
